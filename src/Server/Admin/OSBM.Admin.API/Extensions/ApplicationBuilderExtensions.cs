@@ -9,8 +9,5 @@ public static class ApplicationBuilderExtensions
         using var scope = app.ApplicationServices.CreateScope();
         using var context = scope.ServiceProvider.GetService<T>();
         context?.Database.Migrate();
-        //var dataContext = app.ApplicationServices.GetService<T>();
-        //dataContext?.Database.EnsureCreated();
-        //dataContext?.Database.Migrate();
     }
 }
