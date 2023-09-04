@@ -20,6 +20,7 @@ public class ProductsController : BaseApiResponse
         _mediator = mediator;
     }
 
+    //[POST] api/products
     [HttpPost]
     public async Task<IActionResult> Create(CreateProductCommand request)
     {
@@ -31,6 +32,7 @@ public class ProductsController : BaseApiResponse
         return SuccessResult("");
     }
 
+    //[GET] api/products/1
     [HttpGet("{id:long}")]
     public async Task<IActionResult> GetById([FromRoute] long id)
     {
@@ -40,6 +42,15 @@ public class ProductsController : BaseApiResponse
         {
             return BadResult("product.not.found");
         }
+        return SuccessResult(response);
+    }
+
+    //[GET] api/products
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        var request = new GetAllProductQuery();
+        var response = await _mediator.Send(request);
         return SuccessResult(response);
     }
 }

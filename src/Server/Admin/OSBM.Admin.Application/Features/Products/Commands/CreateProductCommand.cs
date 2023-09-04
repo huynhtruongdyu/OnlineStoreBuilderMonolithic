@@ -7,6 +7,7 @@ using OSBM.Admin.Application.DTOs.Products;
 using OSBM.Admin.Domain.Entities;
 
 namespace OSBM.Admin.Application.Features.Products.Commands;
+
 public record CreateProductCommand(string Name) : IRequest<ProductDto?>;
 
 public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, ProductDto?>

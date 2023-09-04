@@ -3,6 +3,7 @@
 using OSBM.Admin.Application.Contracts.DbContexts;
 using OSBM.Admin.Domain.Common;
 using OSBM.Admin.Domain.Entities;
+using OSBM.Admin.Persistence.Extensions;
 
 namespace OSBM.Admin.Persistence.DbContexts;
 
@@ -46,6 +47,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext, IDisposabl
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        modelBuilder.ApplySoftDeleteQueryFilter();
         //base.OnModelCreating(modelBuilder);
     }
 
