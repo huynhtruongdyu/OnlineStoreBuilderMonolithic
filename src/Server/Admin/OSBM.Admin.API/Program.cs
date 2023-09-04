@@ -8,7 +8,12 @@ using OSBM.Admin.Persistence.DbContexts;
 
 var builder = WebApplication.CreateBuilder(args);
 {
-    builder.Services.AddControllers();
+    builder.Services
+        .AddControllers()
+        .AddJsonOptions(options =>
+        {
+            options.JsonSerializerOptions.IgnoreNullValues = true;
+        });
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
@@ -41,6 +46,8 @@ var app = builder.Build();
     app.UseHttpsRedirection();
 
     app.UseAuthorization();
+
+    app.UseErrorHandler(app.Environment);
 
     app.UseCors();
 
