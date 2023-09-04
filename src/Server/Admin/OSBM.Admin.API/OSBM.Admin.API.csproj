@@ -26,4 +26,8 @@
     <ProjectReference Include="..\OSBM.Admin.Shared\OSBM.Admin.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\" />
+  </ItemGroup>
+
 </Project>
