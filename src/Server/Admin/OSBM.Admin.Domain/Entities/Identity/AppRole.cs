@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace OSBM.Admin.Domain.Entities.Identity;
 
-namespace OSBM.Admin.Domain.Entities.Identity;
 internal class AppRole
 {
 }

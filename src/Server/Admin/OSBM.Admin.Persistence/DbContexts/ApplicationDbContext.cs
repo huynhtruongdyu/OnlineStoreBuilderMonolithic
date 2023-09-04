@@ -6,7 +6,7 @@ using OSBM.Admin.Domain.Entities;
 
 namespace OSBM.Admin.Persistence.DbContexts;
 
-public class ApplicationDbContext : DbContext, IApplicationDbContext
+public class ApplicationDbContext : DbContext, IApplicationDbContext, IDisposable
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> opts) : base(opts)
     {

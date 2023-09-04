@@ -1,6 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+
+using OSBM.Admin.API.Extensions;
 using OSBM.Admin.Application;
 using OSBM.Admin.Infrastructure;
 using OSBM.Admin.Persistence;
+using OSBM.Admin.Persistence.DbContexts;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -16,6 +20,12 @@ var builder = WebApplication.CreateBuilder(args);
 
     //Add Persistence services
     builder.Services.ConfigurePersistenceServices(builder.Configuration);
+
+    //Configure Api Behavior
+    builder.Services.ConfigureApiBehavior();
+
+    //Configure CORS Policy
+    builder.Services.ConfigureCorsPolicy();
 }
 
 var app = builder.Build();
@@ -26,9 +36,13 @@ var app = builder.Build();
         app.UseSwaggerUI();
     }
 
+    app.EnsureMigrationOfContext<ApplicationDbContext>();
+
     app.UseHttpsRedirection();
 
     app.UseAuthorization();
+
+    app.UseCors();
 
     app.MapControllers();
 }

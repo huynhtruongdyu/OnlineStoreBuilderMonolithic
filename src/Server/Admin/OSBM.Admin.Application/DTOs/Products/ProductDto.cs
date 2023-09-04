@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace OSBM.Admin.Application.DTOs.Products;
 
-namespace OSBM.Admin.Application.DTOs.Products;
-internal class ProductDto
+public class ProductDto
 {
+    public long Id { get; set; }
+
+    public string Name { get; set; } = string.Empty;
 }

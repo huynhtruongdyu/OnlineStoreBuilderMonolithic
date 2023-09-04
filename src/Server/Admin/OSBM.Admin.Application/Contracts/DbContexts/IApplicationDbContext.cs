@@ -8,6 +8,8 @@ public interface IApplicationDbContext
 {
     int SaveChanges();
 
+    void Dispose();
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 
     DbSet<Product> Products { get; set; }
