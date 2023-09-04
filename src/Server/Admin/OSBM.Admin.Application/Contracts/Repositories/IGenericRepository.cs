@@ -1,5 +1,7 @@
 ﻿using OSBM.Admin.Domain.Common;
 
+using System.Linq.Expressions;
+
 namespace OSBM.Admin.Application.Contracts.Repositories;
 
 public interface IGenericRepository<T> where T : BaseEntity, new()
@@ -12,9 +14,11 @@ public interface IGenericRepository<T> where T : BaseEntity, new()
 
     void Delete(long id);
 
-    T? Get(long id);
+    T? Find(long id);
 
-    IEnumerable<T> GetAll();
+    IQueryable<T> FindAll();
+
+    IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression);
 
     int SaveChanges();
 

@@ -4,6 +4,8 @@ using OSBM.Admin.Application.Contracts.Repositories;
 using OSBM.Admin.Domain.Common;
 using OSBM.Admin.Persistence.DbContexts;
 
+using System.Linq.Expressions;
+
 namespace OSBM.Admin.Persistence.Repositories;
 
 public abstract class GenericRepository<T> : IGenericRepository<T>, IDisposable where T : BaseEntity, new()
@@ -50,17 +52,12 @@ public abstract class GenericRepository<T> : IGenericRepository<T>, IDisposable 
 
     public void Delete(long id)
     {
-        var foundEntity = Get(id);
+        var foundEntity = Find(id);
         if (foundEntity != null)
         {
             foundEntity.IsDeleted = true;
             Update(foundEntity);
         }
-    }
-
-    public T? Get(long id)
-    {
-        return DbSet.Find(id);
     }
 
     public IEnumerable<T> GetAll()
@@ -76,6 +73,21 @@ public abstract class GenericRepository<T> : IGenericRepository<T>, IDisposable 
     public int SaveChanges()
     {
         return DbContext.SaveChanges();
+    }
+
+    public T? Find(long id)
+    {
+        return DbSet.Find(id);
+    }
+
+    public IQueryable<T> FindAll()
+    {
+        return DbSet;
+    }
+
+    public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
+    {
+        return DbSet.Where(expression);
     }
 
     #endregion Syncronous
