@@ -12,9 +12,9 @@
     <tbody>
       <tr *ngFor="let product of products; let i=index">
         <th scope="row">{{i}}</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
+        <td>{{product.name}}</td>
+        <td>{{product.brief}}</td>
+        <td>{{product.description}}</td>
       </tr>
     </tbody>
   </table>

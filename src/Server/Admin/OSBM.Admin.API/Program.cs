@@ -6,13 +6,15 @@ using OSBM.Admin.Infrastructure;
 using OSBM.Admin.Persistence;
 using OSBM.Admin.Persistence.DbContexts;
 
+using System.Text.Json.Serialization;
+
 var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services
         .AddControllers()
         .AddJsonOptions(options =>
         {
-            options.JsonSerializerOptions.IgnoreNullValues = true;
+            options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
         });
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();

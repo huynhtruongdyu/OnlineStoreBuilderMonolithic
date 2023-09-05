@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace OSBM.Admin.Application.Contracts.Repositories;
 
-public interface IGenericRepository<T> where T : BaseEntity, new()
+public interface IGenericRepository<T> where T : BaseEntity
 {
     #region Syncronous
 

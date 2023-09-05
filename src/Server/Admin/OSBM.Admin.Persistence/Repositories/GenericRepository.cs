@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 
 namespace OSBM.Admin.Persistence.Repositories;
 
-public abstract class GenericRepository<T> : IGenericRepository<T>, IDisposable where T : BaseEntity, new()
+public abstract class GenericRepository<T> : IGenericRepository<T>, IDisposable where T : BaseEntity
 {
     protected readonly ApplicationDbContext DbContext;
     protected readonly DbSet<T> DbSet;
