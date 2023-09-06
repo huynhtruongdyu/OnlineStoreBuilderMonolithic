@@ -18,7 +18,9 @@ public interface IGenericRepository<T> where T : BaseEntity
 
     IQueryable<T> FindAll();
 
-    IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression);
+    IQueryable<T> FindByCondition(Expression<Func<T, bool>>? filter = null,
+                                  Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
+                                  params string[] includeProperties);
 
     int SaveChanges();
 
@@ -26,17 +28,18 @@ public interface IGenericRepository<T> where T : BaseEntity
 
     #region Asynchronous
 
-    //Task AddAsync(T entity, CancellationToken cancellationToken = default);
+    Task AddAsync(T entity, CancellationToken cancellationToken = default);
 
-    //Task UpdateAsync(T entity, CancellationToken cancellationToken = default);
+    Task<T?> FindAsync(long id, CancellationToken cancellationToken = default);
 
-    //Task DeleteAsync(long id, CancellationToken cancellationToken = default);
+    Task<IEnumerable<T>> FindManyAsync(CancellationToken cancellationToken = default,
+                                      Expression<Func<T, bool>>? filter = null,
+                                      Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
+                                      int? take = null,
+                                      int? skip = null,
+                                      params string[] includeProperties);
 
-    //Task<T> GetAsync(long id, CancellationToken cancellationToken = default);
-
-    //Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken = default);
-
-    //Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+    Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 
     #endregion Asynchronous
 }

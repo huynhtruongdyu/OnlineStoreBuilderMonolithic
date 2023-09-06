@@ -1,6 +1,4 @@
-﻿using System.Net;
-
-namespace OSBM.Admin.Shared.Models.ApiResponse;
+﻿namespace OSBM.Admin.Shared.Models.ApiResponse;
 
 public class ApiReponseModel
 {

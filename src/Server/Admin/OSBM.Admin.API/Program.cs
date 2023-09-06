@@ -1,5 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-
 using OSBM.Admin.API.Extensions;
 using OSBM.Admin.Application;
 using OSBM.Admin.Infrastructure;

@@ -24,9 +24,10 @@ public class GetAllProductQueryHandler : IRequestHandler<GetAllProductQuery, IRe
 
     public async Task<IReadOnlyCollection<ProductDto>> Handle(GetAllProductQuery request, CancellationToken cancellationToken)
     {
-        var products = await _productRepository.FindAll()
-            .Select(x => new ProductDto(x.Id, x.Name, x.Brief, x.Description, x.ThumbnailUrl))
-            .ToListAsync(cancellationToken);
+        var products = await _productRepository
+                .FindAll()
+                .Select(x => new ProductDto(x.Id, x.Name, x.Brief, x.Description, x.ThumbnailUrl))
+                .ToListAsync(cancellationToken);
         return products;
     }
 }

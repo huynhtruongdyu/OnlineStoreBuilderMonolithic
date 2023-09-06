@@ -3,11 +3,8 @@
 using Microsoft.AspNetCore.Mvc;
 
 using OSBM.Admin.API.Controllers.Base;
-using OSBM.Admin.Application.DTOs.Products;
 using OSBM.Admin.Application.Features.Products.Commands;
 using OSBM.Admin.Application.Features.Products.Queries;
-
-using System.Net;
 
 namespace OSBM.Admin.API.Controllers;
 

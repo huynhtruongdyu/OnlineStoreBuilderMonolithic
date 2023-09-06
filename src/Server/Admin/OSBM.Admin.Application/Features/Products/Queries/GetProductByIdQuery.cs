@@ -21,13 +21,12 @@ public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, P
 
     public async Task<ProductDto?> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
     {
-        var productFound = _productRepository.Find(request.Id);
+        var productFound = await _productRepository.FindAsync(request.Id, cancellationToken);
         if (productFound == null)
         {
-            await Task.CompletedTask;
             return null;
         }
         var response = _mapper.Map<ProductDto>(productFound);
-        return await Task.FromResult(response);
+        return response;
     }
 }
