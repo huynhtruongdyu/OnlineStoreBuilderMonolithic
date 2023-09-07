@@ -6,9 +6,9 @@ using OSBM.Admin.API.Controllers.Base;
 using OSBM.Admin.Application.Features.Products.Commands;
 using OSBM.Admin.Application.Features.Products.Queries;
 
-namespace OSBM.Admin.API.Controllers;
+namespace OSBM.Admin.API.Controllers.v2;
 
-[ApiVersion("1.0")]
+[ApiVersion("2.0")]
 public class ProductsController : BaseApiV1Controller
 {
     private readonly IMediator _mediator;
@@ -20,7 +20,7 @@ public class ProductsController : BaseApiV1Controller
 
     //[POST] api/products
     [HttpPost]
-    [MapToApiVersion("1.0")]
+    [MapToApiVersion("2.0")]
     public async Task<IActionResult> Create(CreateProductCommand request)
     {
         var response = await _mediator.Send(request);
@@ -33,7 +33,7 @@ public class ProductsController : BaseApiV1Controller
 
     //[GET] api/products/1
     [HttpGet("{id:long}")]
-    [MapToApiVersion("1.0")]
+    [MapToApiVersion("2.0")]
     public async Task<IActionResult> GetById([FromRoute] long id)
     {
         var request = new GetProductByIdQuery(id);
@@ -47,7 +47,7 @@ public class ProductsController : BaseApiV1Controller
 
     //[GET] api/products
     [HttpGet]
-    [MapToApiVersion("1.0")]
+    [MapToApiVersion("2.0")]
     public async Task<IActionResult> GetAll()
     {
         var request = new GetAllProductQuery();

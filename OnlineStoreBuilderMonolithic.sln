@@ -23,6 +23,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OSBM.Admin.Application", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OSBM.Admin.Shared", "src\Server\Admin\OSBM.Admin.Shared\OSBM.Admin.Shared.csproj", "{52E87031-3396-4E17-9408-7FF94FD7AD5B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{C20E0CD9-6AC1-44CF-876F-9D072B87AB78}"
+	ProjectSection(SolutionItems) = preProject
+		TODO.md = TODO.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

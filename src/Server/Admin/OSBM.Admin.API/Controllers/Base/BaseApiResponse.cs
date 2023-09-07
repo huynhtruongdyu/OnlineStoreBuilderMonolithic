@@ -6,8 +6,6 @@ using System.Net;
 
 namespace OSBM.Admin.API.Controllers.Base;
 
-[Route("api/[controller]")]
-[ApiController]
 public class BaseApiResponse : ControllerBase
 {
     [NonAction]
