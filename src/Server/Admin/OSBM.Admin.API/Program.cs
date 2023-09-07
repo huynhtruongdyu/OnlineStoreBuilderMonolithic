@@ -18,8 +18,8 @@ var builder = WebApplication.CreateBuilder(args);
         {
             options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
         });
-    builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddSwaggerGen();
+    //builder.Services.AddEndpointsApiExplorer();
+    //builder.Services.AddSwaggerGen();
 
     #region Add Service layers
 
@@ -44,14 +44,7 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.ConfigureApiVersioning();
 
     // Add ApiExplorer to discover versions
-    builder.Services.AddVersionedApiExplorer(setup =>
-    {
-        setup.GroupNameFormat = "'v'VVV";
-        setup.SubstituteApiVersionInUrl = true;
-    });
-    builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddSwaggerGen();
-    builder.Services.ConfigureOptions<ConfigureSwaggerOptions>();
+    builder.Services.ConfigureApiExplorerToDiscoverVersions();
 }
 
 var app = builder.Build();
@@ -64,8 +57,7 @@ var app = builder.Build();
             var apiVersionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
             foreach (var description in apiVersionDescriptionProvider.ApiVersionDescriptions)
             {
-                options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json",
-                    description.GroupName.ToUpperInvariant());
+                options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
             }
         });
     }

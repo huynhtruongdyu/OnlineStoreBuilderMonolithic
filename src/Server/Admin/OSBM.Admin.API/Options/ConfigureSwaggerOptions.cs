@@ -10,8 +10,7 @@ namespace OSBM.Admin.API.Options
     {
         private readonly IApiVersionDescriptionProvider _provider;
 
-        public ConfigureSwaggerOptions(
-            IApiVersionDescriptionProvider provider)
+        public ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider)
         {
             _provider = provider;
         }
@@ -25,9 +24,7 @@ namespace OSBM.Admin.API.Options
             // add swagger document for every API version discovered
             foreach (var description in _provider.ApiVersionDescriptions)
             {
-                options.SwaggerDoc(
-                    description.GroupName,
-                    CreateVersionInfo(description));
+                options.SwaggerDoc(description.GroupName, CreateVersionInfo(description));
             }
         }
 
@@ -46,12 +43,11 @@ namespace OSBM.Admin.API.Options
         /// </summary>
         /// <param name="description"></param>
         /// <returns>Information about the API</returns>
-        private OpenApiInfo CreateVersionInfo(
-                ApiVersionDescription desc)
+        private OpenApiInfo CreateVersionInfo(ApiVersionDescription desc)
         {
             var info = new OpenApiInfo()
             {
-                Title = ".NET Core (.NET 6) Web API",
+                Title = "OSBM (.NET 7) Web API",
                 Version = desc.ApiVersion.ToString()
             };
 

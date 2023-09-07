@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 
+using OSBM.Admin.API.Options;
+
 namespace OSBM.Admin.API.Extensions;
 
 public static class ServiceExtensions
@@ -35,5 +37,17 @@ public static class ServiceExtensions
                                                             new HeaderApiVersionReader("x-api-version"),
                                                             new MediaTypeApiVersionReader("x-api-version"));
         });
+    }
+
+    public static void ConfigureApiExplorerToDiscoverVersions(this IServiceCollection services)
+    {
+        services.AddVersionedApiExplorer(setup =>
+        {
+            setup.GroupNameFormat = "'v'VVV";
+            setup.SubstituteApiVersionInUrl = true;
+        });
+        services.AddEndpointsApiExplorer();
+        services.AddSwaggerGen();
+        services.ConfigureOptions<ConfigureSwaggerOptions>();
     }
 }
