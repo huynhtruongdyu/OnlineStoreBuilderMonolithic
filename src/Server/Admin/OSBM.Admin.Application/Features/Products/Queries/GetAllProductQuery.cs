@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 using MediatR;
 
@@ -26,7 +27,7 @@ public class GetAllProductQueryHandler : IRequestHandler<GetAllProductQuery, IRe
     {
         var products = await _productRepository
                 .FindAll()
-                .Select(x => new ProductDto(x.Id, x.Name, x.Brief, x.Description, x.ThumbnailUrl))
+                .ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
         return products;
     }

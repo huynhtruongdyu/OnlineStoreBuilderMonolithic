@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OSBM.Admin.Domain\OSBM.Admin.Domain.csproj" />
+    <ProjectReference Include="..\OSBM.Admin.Shared\OSBM.Admin.Shared.csproj" />
   </ItemGroup>
 
 </Project>

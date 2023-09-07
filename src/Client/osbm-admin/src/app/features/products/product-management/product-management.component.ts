@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ApiResponse } from 'src/app/core/models/api-response.model';
+import { ApiResponse, PaginationData } from 'src/app/core/models/api-response.model';
+import { PaginationRequest } from 'src/app/core/models/common/pagination-request.model';
 import { Product } from 'src/app/core/models/products/product.model';
 import { ProductsService } from 'src/app/core/services/products.service';
 
@@ -21,11 +22,12 @@ export class ProductManagementComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getAllProductSubscription = this.productService.getAll()
+    this.getAllProductSubscription = this.productService.getAllV2(({ pageIndex: 2 }) as PaginationRequest)
       .subscribe({
         next: (resp: ApiResponse) => {
           if (resp.isSuccess) {
-            this.products = resp.data as Product[];
+            console.log('resp', resp);
+            this.products = (resp.data as PaginationData).items as Product[]
           }
         },
         error: (error: any) => {

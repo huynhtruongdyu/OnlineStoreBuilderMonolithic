@@ -48,9 +48,9 @@ public class ProductsController : BaseApiV1Controller
     //[GET] api/products
     [HttpGet]
     [MapToApiVersion("2.0")]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll([FromQuery] GetProductsWithPaginationQuery request)
     {
-        var request = new GetAllProductQuery();
+        //var request = new GetAllProductQuery();
         var response = await _mediator.Send(request);
         return SuccessResult(response);
     }
