@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.Extensions.FileProviders;
 
 using OSBM.Admin.API.Extensions;
 using OSBM.Admin.Application;
@@ -79,6 +80,17 @@ var app = builder.Build();
     //Configure Error Handling
     app.UseErrorHandler(app.Environment);
     //app.UseMiddleware<ErrorHandlingMiddleware>();
+
+    app.UseStaticFiles(new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.ContentRootPath, "wwwroot")),
+        RequestPath = "/public",
+        OnPrepareResponse = ctx =>
+        {
+            // Set cache control headers
+            ctx.Context.Response.Headers.Append("Cache-Control", "public, max-age=3600"); // Cache for 1 hour
+        }
+    }); ;
 
     app.UseCors();
 
