@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.Extensions.Options;
 
 using OSBM.Admin.API.Extensions;
-using OSBM.Admin.API.Options;
+using OSBM.Admin.API.Middlewares;
 using OSBM.Admin.Application;
 using OSBM.Admin.Infrastructure;
 using OSBM.Admin.Persistence;
@@ -18,8 +17,6 @@ var builder = WebApplication.CreateBuilder(args);
         {
             options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
         });
-    //builder.Services.AddEndpointsApiExplorer();
-    //builder.Services.AddSwaggerGen();
 
     #region Add Service layers
 
@@ -43,8 +40,14 @@ var builder = WebApplication.CreateBuilder(args);
     //Configure API Versioning
     builder.Services.ConfigureApiVersioning();
 
-    // Add ApiExplorer to discover versions
+    //Configure ApiExplorer to discover versions
     builder.Services.ConfigureApiExplorerToDiscoverVersions();
+
+    ///Configure Rate Limiter
+    ///refer:
+    ///- https://www.youtube.com/watch?v=1tPVVDEDGtE
+    ///- https://blog.maartenballiauw.be/post/2022/09/26/aspnet-core-rate-limiting-middleware.html
+    builder.Services.ConfigureRateLimiter();
 }
 
 var app = builder.Build();
@@ -66,13 +69,17 @@ var app = builder.Build();
 
     app.UseHttpsRedirection();
 
+    app.UseRateLimiter();
+
     app.UseAuthorization();
 
+    //Configure Error Handling
     app.UseErrorHandler(app.Environment);
+    //app.UseMiddleware<ErrorHandlingMiddleware>();
 
     app.UseCors();
 
     app.MapControllers();
-}
 
-app.Run();
+    app.Run();
+}

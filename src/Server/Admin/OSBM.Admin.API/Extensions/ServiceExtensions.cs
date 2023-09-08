@@ -1,7 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.AspNetCore.RateLimiting;
 
 using OSBM.Admin.API.Options;
+using OSBM.Admin.Shared.Models.ApiResponse;
+
+using System;
+using System.Net;
+using System.Threading.RateLimiting;
 
 namespace OSBM.Admin.API.Extensions;
 
@@ -49,5 +55,40 @@ public static class ServiceExtensions
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
         services.ConfigureOptions<ConfigureSwaggerOptions>();
+    }
+
+    public static void ConfigureRateLimiter(this IServiceCollection services)
+    {
+        services.AddRateLimiter(rateLimitOpts =>
+        {
+            rateLimitOpts.OnRejected = async (context, token) =>
+            {
+                context.HttpContext.Response.StatusCode = StatusCodes.Status429TooManyRequests;
+                context.HttpContext.Response.ContentType = "application/json";
+                await context.HttpContext.Response.WriteAsync(new ApiReponseModel(false, StatusCodes.Status429TooManyRequests, messages: "too.many.request").ToString());
+                //if (context.Lease.TryGetMetadata(MetadataName.RetryAfter, out var retryAfter))
+                //{
+                //    await context.HttpContext.Response.WriteAsync(
+                //        $"Too many requests. Please try again after {retryAfter.TotalMinutes} minute(s). " +
+                //        $"Read more about our rate limits at https://example.org/docs/ratelimiting.", cancellationToken: token);
+                //}
+                //else
+                //{
+                //    await context.HttpContext.Response.WriteAsync(
+                //        "Too many requests. Please try again later. " +
+                //        "Read more about our rate limits at https://example.org/docs/ratelimiting.", cancellationToken: token);
+                //}
+            };
+
+            rateLimitOpts.AddFixedWindowLimiter("fixed", opts =>
+            {
+                // 3 req / 10s
+                opts.Window = TimeSpan.FromSeconds(10);
+                opts.PermitLimit = 3;
+
+                opts.QueueLimit = 0;
+                opts.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+            });
+        });
     }
 }
