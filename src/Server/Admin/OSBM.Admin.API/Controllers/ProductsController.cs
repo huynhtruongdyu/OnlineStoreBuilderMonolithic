@@ -48,6 +48,7 @@ public class ProductsController : BaseApiV1Controller
     //[GET] api/products
     [HttpGet]
     [MapToApiVersion("1.0")]
+    [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any, NoStore = false)]
     public async Task<IActionResult> GetAll()
     {
         var request = new GetAllProductQuery();

@@ -82,9 +82,9 @@ public static class ServiceExtensions
             {
                 // 3 req / 10s
                 opts.Window = TimeSpan.FromSeconds(10);
-                opts.PermitLimit = 3;
+                opts.PermitLimit = 100;
 
-                opts.QueueLimit = 0;
+                opts.QueueLimit = 10;
                 opts.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
             });
         });

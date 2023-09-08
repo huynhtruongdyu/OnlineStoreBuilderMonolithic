@@ -17,6 +17,8 @@ var builder = WebApplication.CreateBuilder(args);
             options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
         });
 
+    builder.Services.AddResponseCaching();
+
     #region Add Service layers
 
     //Add Application services
@@ -69,6 +71,8 @@ var app = builder.Build();
     app.UseHttpsRedirection();
 
     app.UseRateLimiter();
+
+    app.UseResponseCaching();
 
     app.UseAuthorization();
 
