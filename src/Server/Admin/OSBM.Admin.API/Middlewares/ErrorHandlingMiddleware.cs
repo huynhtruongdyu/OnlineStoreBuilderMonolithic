@@ -20,7 +20,6 @@ public class ErrorHandlingMiddleware
         try
         {
             await _next(httpContext);
-            Console.WriteLine(httpContext.Response.StatusCode);
         }
         catch (Exception ex)
         {

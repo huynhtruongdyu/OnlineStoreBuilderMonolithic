@@ -9,61 +9,38 @@ namespace OSBM.Admin.API.Controllers.Base;
 public class BaseApiResponse : ControllerBase
 {
     [NonAction]
-    [ProducesResponseType(typeof(ApiReponseModel), 200)]
+    [ProducesResponseType(typeof(ApiReponseModel), StatusCodes.Status200OK)]
     public IActionResult SuccessResult(string message)
     {
         return Ok(new ApiReponseModel()
         {
             IsSuccess = true,
-            StatusCode = (int)HttpStatusCode.OK,
+            StatusCode = StatusCodes.Status200OK,
             Messages = message
         });
     }
 
     [NonAction]
-    [ProducesResponseType(typeof(ApiReponseModel), 200)]
+    [ProducesResponseType(typeof(ApiReponseModel), StatusCodes.Status200OK)]
     public IActionResult SuccessResult(object data)
     {
         return Ok(new ApiReponseModel()
         {
             IsSuccess = true,
-            StatusCode = (int)HttpStatusCode.OK,
+            StatusCode = StatusCodes.Status200OK,
             Data = data
         });
     }
 
     [NonAction]
-    [ProducesResponseType(typeof(ApiReponseModel), (int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType(typeof(ApiReponseModel), StatusCodes.Status400BadRequest)]
     public IActionResult BadResult(string message)
     {
         return BadRequest(new ApiReponseModel()
         {
             IsSuccess = false,
             Messages = message,
-            StatusCode = (int)HttpStatusCode.BadRequest
-        });
-    }
-
-    [NonAction]
-    [ProducesResponseType(typeof(ApiReponseModel), (int)HttpStatusCode.BadRequest)]
-    public IActionResult BadResult(string message, HttpStatusCode statusCode)
-    {
-        return BadRequest(new ApiReponseModel()
-        {
-            IsSuccess = false,
-            StatusCode = (int)statusCode
-        });
-    }
-
-    [NonAction]
-    [ProducesResponseType(typeof(ApiReponseModel), (int)HttpStatusCode.BadRequest)]
-    public IActionResult ErrorResult(string messages, HttpStatusCode statusCode)
-    {
-        return BadRequest(new ApiReponseModel()
-        {
-            IsSuccess = false,
-            StatusCode = (int)statusCode,
-            Messages = messages
+            StatusCode = StatusCodes.Status400BadRequest
         });
     }
 }

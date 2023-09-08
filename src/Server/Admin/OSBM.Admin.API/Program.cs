@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.FileProviders;
 
 using OSBM.Admin.API.Extensions;
+using OSBM.Admin.API.Middlewares;
 using OSBM.Admin.Application;
 using OSBM.Admin.Infrastructure;
 using OSBM.Admin.Persistence;
@@ -78,8 +79,8 @@ var app = builder.Build();
     app.UseAuthorization();
 
     //Configure Error Handling
-    app.UseErrorHandler(app.Environment);
-    //app.UseMiddleware<ErrorHandlingMiddleware>();
+    //app.UseErrorHandler(app.Environment);
+    app.UseMiddleware<ErrorHandlingMiddleware>();
 
     app.UseStaticFiles(new StaticFileOptions
     {
