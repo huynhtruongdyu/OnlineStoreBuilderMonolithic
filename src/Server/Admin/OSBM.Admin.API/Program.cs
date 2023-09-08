@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 using OSBM.Admin.API.Extensions;
-using OSBM.Admin.API.Middlewares;
 using OSBM.Admin.Application;
 using OSBM.Admin.Infrastructure;
 using OSBM.Admin.Persistence;

@@ -12,8 +12,8 @@ using OSBM.Admin.Persistence.DbContexts;
 namespace OSBM.Admin.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230904080313_init")]
-    partial class init
+    [Migration("20230908085224_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

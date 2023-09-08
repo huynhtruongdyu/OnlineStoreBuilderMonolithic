@@ -1,7 +1,6 @@
 ﻿using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.RateLimiting;
 
 using OSBM.Admin.API.Controllers.Base;
 using OSBM.Admin.Application.Features.Products.Commands;

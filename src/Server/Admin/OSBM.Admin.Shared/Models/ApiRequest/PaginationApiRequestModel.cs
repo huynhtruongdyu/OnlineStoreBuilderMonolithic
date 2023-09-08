@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OSBM.Admin.Shared.Models.ApiRequest;
+﻿namespace OSBM.Admin.Shared.Models.ApiRequest;
 
 public class PaginationApiRequestModel
 {

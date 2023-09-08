@@ -4,12 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using OSBM.Admin.Shared.Models.ApiResponse;
 using OSBM.Admin.Shared.Models.Exceptions;
 
-using System.Net;
-
-using System.Text.Json;
-
-using OperationCanceledException = OSBM.Admin.Shared.Models.Exceptions.OperationCanceledException;
-
 namespace OSBM.Admin.API.Extensions;
 
 public static class ApplicationBuilderExtensions
@@ -35,21 +29,21 @@ public static class ApplicationBuilderExtensions
 
                 context.Response.StatusCode = contextFeature.Error switch
                 {
-                    BadRequestException => (int)HttpStatusCode.BadRequest,
-                    OperationCanceledException => (int)HttpStatusCode.ServiceUnavailable,
-                    NotFoundException => (int)HttpStatusCode.NotFound,
-                    _ => (int)HttpStatusCode.InternalServerError
+                    OSBBadRequestException => StatusCodes.Status400BadRequest,
+                    OSBOperationCanceledException => StatusCodes.Status503ServiceUnavailable,
+                    OSBNotFoundException => StatusCodes.Status404NotFound,
+                    _ => StatusCodes.Status500InternalServerError
                 };
 
                 var errorResponse = new ApiReponseModel
                 {
+                    IsSuccess = false,
                     StatusCode = context.Response.StatusCode,
                     Messages = contextFeature.Error.GetBaseException().Message,
-                    IsSuccess = false,
                     StackTrace = env.IsDevelopment() ? contextFeature.Error.StackTrace : null
                 };
 
-                await context.Response.WriteAsync(JsonSerializer.Serialize(errorResponse));
+                await context.Response.WriteAsync(errorResponse.ToString());
             });
         });
     }

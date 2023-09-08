@@ -5,8 +5,6 @@ using Microsoft.AspNetCore.RateLimiting;
 using OSBM.Admin.API.Options;
 using OSBM.Admin.Shared.Models.ApiResponse;
 
-using System;
-using System.Net;
 using System.Threading.RateLimiting;
 
 namespace OSBM.Admin.API.Extensions;
