@@ -1,13 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 using OSBM.Admin.Application.Contracts.DbContexts;
 using OSBM.Admin.Domain.Aggregates.Products;
 using OSBM.Admin.Domain.Common;
+using OSBM.Admin.Domain.Identities;
 using OSBM.Admin.Persistence.Extensions;
 
 namespace OSBM.Admin.Persistence.DbContexts;
 
-public class ApplicationDbContext : DbContext, IApplicationDbContext, IDisposable
+public class ApplicationDbContext : IdentityDbContext<AppUser, AppRole, long>, IApplicationDbContext, IDisposable
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> opts) : base(opts)
     {
@@ -48,7 +50,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext, IDisposabl
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         modelBuilder.ApplySoftDeleteQueryFilter();
-        //base.OnModelCreating(modelBuilder);
+        base.OnModelCreating(modelBuilder);
     }
 
     #endregion Override methods

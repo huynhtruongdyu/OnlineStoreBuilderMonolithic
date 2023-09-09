@@ -1,13 +1,21 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 using OSBM.Admin.API.Extensions;
 using OSBM.Admin.API.Middlewares;
 using OSBM.Admin.Application;
+using OSBM.Admin.Domain.Identities;
 using OSBM.Admin.Infrastructure;
 using OSBM.Admin.Persistence;
 using OSBM.Admin.Persistence.DbContexts;
+using OSBM.Admin.Shared.Models.ApiResponse;
 
+using System.Net.Mime;
+using System.Text;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -51,6 +59,44 @@ var builder = WebApplication.CreateBuilder(args);
     ///- https://www.youtube.com/watch?v=1tPVVDEDGtE
     ///- https://blog.maartenballiauw.be/post/2022/09/26/aspnet-core-rate-limiting-middleware.html
     builder.Services.ConfigureRateLimiter();
+
+    //Configure Authenticate
+    builder.Services.AddIdentity<AppUser, AppRole>()
+        .AddEntityFrameworkStores<ApplicationDbContext>()
+        .AddDefaultTokenProviders();
+    builder.Services.AddAuthentication(x =>
+        {
+            x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+        }).AddJwtBearer(x =>
+        {
+            x.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
+                ValidAudience = builder.Configuration["JwtSettings:Audience"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"])),
+
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true
+            };
+            x.Events = new JwtBearerEvents
+            {
+                OnChallenge = async context =>
+                {
+                    // Call this to skip the default logic and avoid using the default response
+                    context.HandleResponse();
+
+                    // Write to the response in any way you wish
+                    context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                    context.Response.ContentType = MediaTypeNames.Application.Json;
+                    await context.Response.WriteAsync(new ApiReponseModel(false, StatusCodes.Status401Unauthorized, messages: "unauthorize").ToString());
+                }
+            };
+        });
+    builder.Services.AddAuthorization();
 }
 
 var app = builder.Build();
@@ -71,6 +117,9 @@ var app = builder.Build();
     app.EnsureMigrationOfContext<ApplicationDbContext>();
 
     app.UseHttpsRedirection();
+
+    app.UseAuthentication();
+    app.UseAuthorization();
 
     app.UseRateLimiter();
 

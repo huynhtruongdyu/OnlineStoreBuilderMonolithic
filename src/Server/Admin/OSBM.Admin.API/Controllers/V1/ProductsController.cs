@@ -1,10 +1,12 @@
 ﻿using MediatR;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using OSBM.Admin.API.Controllers.Base;
 using OSBM.Admin.Application.Features.Products.Commands;
 using OSBM.Admin.Application.Features.Products.Queries;
+using OSBM.Admin.Shared.Constants;
 
 namespace OSBM.Admin.API.Controllers.V1;
 
@@ -34,6 +36,7 @@ public class ProductsController : BaseApiV1Controller
     //[GET] api/products/1
     [HttpGet("{id:long}")]
     [MapToApiVersion("1.0")]
+    [Authorize(Roles = RoleConstants.ADMIN)]
     public async Task<IActionResult> GetById([FromRoute] long id)
     {
         var request = new GetProductByIdQuery(id);

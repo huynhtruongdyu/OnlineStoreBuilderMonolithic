@@ -10,6 +10,7 @@ public static class DependencyInjection
     public static IServiceCollection ConfigureInfrastructureServices(this IServiceCollection services)
     {
         services.AddScoped<IEmailSenderService, EmailSenderService>();
+        services.AddScoped<IAuthService, AuthService>();
         return services;
     }
 }
