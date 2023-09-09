@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 using OSBM.Admin.Application.Contracts.DbContexts;
+using OSBM.Admin.Domain.Aggregates.Products;
 using OSBM.Admin.Domain.Common;
-using OSBM.Admin.Domain.Entities;
 using OSBM.Admin.Persistence.Extensions;
 
 namespace OSBM.Admin.Persistence.DbContexts;

@@ -1,5 +1,5 @@
 ﻿using OSBM.Admin.Application.Contracts.Repositories;
-using OSBM.Admin.Domain.Entities;
+using OSBM.Admin.Domain.Aggregates.Products;
 using OSBM.Admin.Persistence.DbContexts;
 
 namespace OSBM.Admin.Persistence.Repositories;

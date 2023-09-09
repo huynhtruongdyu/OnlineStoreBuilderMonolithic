@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-using OSBM.Admin.Domain.Entities;
+using OSBM.Admin.Domain.Aggregates.Products;
 
 namespace OSBM.Admin.Application.Contracts.DbContexts;
 

@@ -1,6 +1,7 @@
 ﻿namespace OSBM.Admin.Domain.Common;
 
-public class BaseEntity
+public class BaseEntity : IAggregateRoot
+
 {
     public long Id { get; set; }
 

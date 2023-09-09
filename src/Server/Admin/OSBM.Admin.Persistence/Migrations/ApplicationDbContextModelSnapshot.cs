@@ -22,7 +22,7 @@ namespace OSBM.Admin.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("OSBM.Admin.Domain.Entities.Product", b =>
+            modelBuilder.Entity("OSBM.Admin.Domain.Aggregates.Products.Product", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -66,7 +66,7 @@ namespace OSBM.Admin.Persistence.Migrations
                     b.ToTable("Products", (string)null);
                 });
 
-            modelBuilder.Entity("OSBM.Admin.Domain.Entities.Store", b =>
+            modelBuilder.Entity("OSBM.Admin.Domain.Aggregates.Stores.Store", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using OSBM.Admin.Domain.Entities;
+using OSBM.Admin.Domain.Aggregates.Stores;
 
 namespace OSBM.Admin.Persistence.Configurations;
 

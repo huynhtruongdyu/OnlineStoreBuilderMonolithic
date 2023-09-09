@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Aggregates\Discounts\" />
+    <Folder Include="Aggregates\Orders\" />
+  </ItemGroup>
+
 </Project>

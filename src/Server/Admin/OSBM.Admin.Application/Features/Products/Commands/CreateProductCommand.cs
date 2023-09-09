@@ -4,7 +4,7 @@ using MediatR;
 
 using OSBM.Admin.Application.Contracts.Repositories;
 using OSBM.Admin.Application.DTOs.Products;
-using OSBM.Admin.Domain.Entities;
+using OSBM.Admin.Domain.Aggregates.Products;
 
 namespace OSBM.Admin.Application.Features.Products.Commands;
 

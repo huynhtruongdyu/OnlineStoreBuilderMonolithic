@@ -2,7 +2,7 @@
 
 using OSBM.Admin.Application.DTOs.Products;
 using OSBM.Admin.Application.Features.Products.Commands;
-using OSBM.Admin.Domain.Entities;
+using OSBM.Admin.Domain.Aggregates.Products;
 
 namespace OSBM.Admin.Application.Mapping;
 
