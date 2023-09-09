@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './features/auth/auth.component';
 import { HomeComponent } from './features/home/home.component';
-import { ProductsComponent } from './features/products/products.component';
+import { ProductsManagementComponent } from './features/products/products-management/products-management.component';
 import { BlankLayoutComponent } from './layouts/blank-layout/blank-layout.component';
 import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.component';
 
@@ -17,7 +17,8 @@ const routes: Routes = [
       },
       {
         path: 'products',
-        component: ProductsComponent
+        component: ProductsManagementComponent,
+
       }
     ]
   },
