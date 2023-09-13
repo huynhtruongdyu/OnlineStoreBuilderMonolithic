@@ -1,0 +1,39 @@
+.title {
+  font-size: var(--fs-h1);
+}
+.sub-title {
+  font-size: var(--fs-h3);
+}
+
+/* Buttons styles start */
+.btn {
+  display: inline-block;
+  border: none;
+  padding: 0.5em 1em;
+  margin: 0;
+  text-decoration: none;
+  background: var(--clr-primary);
+  color: #ffffff;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  text-align: center;
+  transition: background 250ms ease-in-out, transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.btn:hover,
+.btn:focus {
+  background: var(--clr-primary);
+}
+
+.btn:focus {
+  outline: 1px solid #fff;
+  outline-offset: -4px;
+}
+
+.btn:active {
+  transform: scale(0.99);
+}
+/* Button styles end */

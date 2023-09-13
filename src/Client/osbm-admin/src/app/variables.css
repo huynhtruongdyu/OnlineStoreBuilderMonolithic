@@ -1,0 +1,25 @@
+:root {
+  /* COLORS */
+  --clr-primary: #333;
+  --clr-bg-primary: var(--clr-primary);
+  --clr-gray: #666;
+
+  /* FONT SIZES */
+  /* base font size - applied at body / html level */
+  --fs-base: 16px;
+  /* larger than heading font sizes */
+  --fs-giga: 80px;
+  --fs-mega: 70px;
+  --fs-kilo: 60px;
+  /* heading font sizes */
+  --fs-h1: 36px;
+  --fs-h2: 32px;
+  --fs-h3: 28px;
+  --fs-h4: 24px;
+  --fs-h5: 20px;
+  --fs-h6: 18px;
+  /* smaller than heading font sizes */
+  --fs-milli: 14px;
+  --fs-micro: 10px;
+  --fs-nano: 8px;
+}
